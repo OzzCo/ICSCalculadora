@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onButtonPressed(view : View){
-
         mitexto.text = model.display.toString()
-
     }
 
     fun onePressed(view : View){
@@ -63,12 +61,10 @@ class MainActivity : AppCompatActivity() {
         model.zeroPressed()
         mitexto.setText( model.display.toString())
     }
-
     fun sumPressed(view:View){
         model.sumPressed()
         mitexto.text = model.display.toString()
     }
-
     fun subtractionPressed(view:View){
         model.subtractionPressed()
         mitexto.text = model.display.toString()
@@ -89,5 +85,16 @@ class MainActivity : AppCompatActivity() {
         model.acPressed()
         mitexto.text = model.display.toString()
     }
-
+    fun signPressed(view:View){
+        model.signPressed()
+        mitexto.text = model.display.toString()
+    }
+    fun dotPressed(view:View){
+        model.dotPressed()
+        mitexto.text = model.display.toString()
+    }
+    fun percentagePressed(view:View){
+        model.percentagePressed()
+        mitexto.setText( model.display.toString())
+    }
 }

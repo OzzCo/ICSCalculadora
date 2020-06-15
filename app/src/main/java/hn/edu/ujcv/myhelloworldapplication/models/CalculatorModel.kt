@@ -8,6 +8,7 @@ class CalculatorModel {
     val subs = 2;
     val mul = 4;
     val div = 5;
+    var percent = 6;
 
     // variables que llevan el estado de la calculadora
     var display: Double = 0.0
@@ -16,61 +17,97 @@ class CalculatorModel {
     var operacion: Int = 0
     var resultado: Double = 0.0
     var willClear = false;
+    var dotExistence = false;
 
-    fun xd(digit: Double, clear: Boolean =  false){
-        when (operacion) {
-            none ->if(resultado == 0.0){
-                display = digitize(display,digit)
-            }else if(resultado !== 0.0) {
-                resultado = 0.0
-                acPressed()
-            }
-            else-> {
-                if(willClear){
+    fun xd(digit: Double, clear: Boolean = false) {
+        if (resultado == 0.0) {
+            if (dotExistence) {
+                if (willClear) {
                     willClear = false
                     operando1 = display
                     display = digit
-                }else{
-                    display = digitize(display,digit)
+                } else {
+                    display = digitize(display, digit, true)
+                    dotExistence = false
+                }
+            } else {
+                if (willClear) {
+                    willClear = false
+                    operando1 = display
+                    display = digit
+                } else {
+                    display = digitize(display, digit)
                 }
             }
         }
-    }
+
+        if (resultado !== 0.0) {
+
+            if (dotExistence) {
+                if (willClear) {
+                    willClear = false
+                    resultado = display
+                    display = digit
+                } else {
+                    display = digitize(display, digit, true)
+                    dotExistence = false
+                }
+            } else {
+                if (willClear) {
+                    willClear = false
+                    operando1 = display
+                    display = digit
+                } else {
+                    display = digitize(display, digit)
+                }
+            }
+        }
+        }
+
+
     //metodos para manipular el estado.
-    fun onePressed(){
+    fun onePressed() {
         xd(1.0)
     }
-    fun twoPressed(){
+
+    fun twoPressed() {
         xd(2.0)
     }
-    fun threePressed(){
+
+    fun threePressed() {
         xd(3.0)
     }
-    fun fourPressed(){
+
+    fun fourPressed() {
         xd(4.0)
     }
-    fun fivePressed(){
+
+    fun fivePressed() {
         xd(5.0)
     }
-    fun sixPressed(){
+
+    fun sixPressed() {
         xd(6.0)
     }
-    fun sevenPressed(){
+
+    fun sevenPressed() {
         xd(7.0)
     }
-    fun eigthPressed(){
+
+    fun eigthPressed() {
         xd(8.0)
     }
-    fun ninePressed(){
+
+    fun ninePressed() {
         xd(9.0)
     }
-    fun zeroPressed(){
+
+    fun zeroPressed() {
         xd(0.0)
     }
 
-
-    fun sumPressed(){
-        if(resultado !== 0.0){
+    fun sumPressed() {
+        if (resultado !== 0.0) {
             operando1 = display
         }
         operacion = sum
@@ -78,8 +115,8 @@ class CalculatorModel {
 
     }
 
-    fun subtractionPressed(){
-        if(resultado !== 0.0){
+    fun subtractionPressed() {
+        if (resultado !== 0.0) {
             operando1 = display
         }
         operacion = subs
@@ -87,8 +124,8 @@ class CalculatorModel {
 
     }
 
-    fun multiplicationPressed(){
-        if(resultado !== 0.0){
+    fun multiplicationPressed() {
+        if (resultado !== 0.0) {
             operando1 = display
         }
         operacion = mul
@@ -96,8 +133,8 @@ class CalculatorModel {
 
     }
 
-    fun divisionPressed(){
-        if(resultado !== 0.0){
+    fun divisionPressed() {
+        if (resultado !== 0.0) {
             operando1 = display
         }
         operacion = div
@@ -105,58 +142,80 @@ class CalculatorModel {
 
     }
 
-    fun equalsPressed(){
-            operando2 = display;
-
-        if(operacion == sum){
+    fun equalsPressed() {
+        operando2 = display;
+        if (operacion == percent) {
+            resultado = (operando1*operando2)/100
+            display = resultado
+            valueRest()
+        }
+        if (operacion == sum) {
             resultado = operando1 + operando2
             display = resultado
-             valueRest()
+            valueRest()
         }
-        if(operacion == subs){
+        if (operacion == subs) {
             resultado = operando1 - operando2
             display = resultado
-             valueRest()
+            valueRest()
         }
-        if(operacion == mul){
+        if (operacion == mul) {
             resultado = operando1 * operando2
             display = resultado
-             valueRest()
+            valueRest()
         }
-        if(operacion == div){
-            if (operando2 !== 0.0){
+        if (operacion == div) {
+            if (operando2 !== 0.0) {
                 resultado = operando1 / operando2
-            display = resultado
+                display = resultado
                 operando2 = 0.0
-            }
-            else display = 00000000000000000000.0
+            } else display = 1.0
         }
-         valueRest()
+        valueRest()
 
     }
 
-    fun acPressed(){
-         display = 0.0
-         operando1 = 0.0
-         operando2 = 0.0
-         operacion=  0
-         willClear = false;
-    }
-
-    fun valueRest(){
+    fun acPressed() {
+        display = 0.0
         operando1 = 0.0
         operando2 = 0.0
-        operacion=  0
+        operacion = 0
+        willClear = false
+        dotExistence = false
+        resultado = 0.0
+    }
+
+    fun valueRest() {
+        operando1 = 0.0
+        operando2 = 0.0
+        operacion = 0
         willClear = false;
     }
 
-    // metodos ayudantes
-    fun digitize( numeroActual:Double, digito: Double ) : Double{
-
-        return numeroActual * 10 + digito
+    fun signPressed() {
+        display *= -1
     }
 
+    fun dotPressed() {
+        dotExistence = true
+        willClear = false
+    }
 
+    fun percentagePressed(){
+        if (resultado !== 0.0) {
+            operando1 = display
+        }
+        operacion = percent
+        willClear = true
+    }
 
+    // metodos ayudantes
+    fun digitize(numeroActual: Double, digito: Double, dotExistence: Boolean = false): Double {
+        if (dotExistence){
+            return numeroActual + (digito*0.10)
+        }
+        return numeroActual * 10 + digito
+
+    }
 
 }
