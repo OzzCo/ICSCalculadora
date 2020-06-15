@@ -2,8 +2,7 @@ package hn.edu.ujcv.myhelloworldapplication.models
 
 
 import android.annotation.SuppressLint
-import android.widget.Toast
-import hn.edu.ujcv.myhelloworldapplication.R
+
 
 
 class CalculatorModel {
@@ -52,7 +51,7 @@ class CalculatorModel {
             if (dotExistence) {
                 if (willClear) {
                     willClear = false
-                   /**/resultado = display
+                    resultado = display
                     display = digit
                 } else {
                     display = digitize(display, digit, true)
@@ -121,7 +120,6 @@ class CalculatorModel {
         }
         operacion = sum
         willClear = true
-
     }
 
     fun subtractionPressed() {
