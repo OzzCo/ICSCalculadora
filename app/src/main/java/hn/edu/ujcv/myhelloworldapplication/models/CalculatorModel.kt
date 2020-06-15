@@ -1,5 +1,11 @@
 package hn.edu.ujcv.myhelloworldapplication.models
 
+
+import android.annotation.SuppressLint
+import android.widget.Toast
+import hn.edu.ujcv.myhelloworldapplication.R
+
+
 class CalculatorModel {
     //
     //constantes de operaciones
@@ -145,6 +151,7 @@ class CalculatorModel {
 
     }
 
+    @SuppressLint("ShowToast")
     fun equalsPressed() {
         operando2 = display;
         if (operacion == percent) {
@@ -172,7 +179,8 @@ class CalculatorModel {
                 resultado = operando1 / operando2
                 display = resultado
                 operando2 = 0.0
-            } else display = 1.0
+            } else display = operando1
+
         }
         valueRest()
 
