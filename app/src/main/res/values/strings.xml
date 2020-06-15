@@ -2,7 +2,8 @@
     <string name="app_name">My Hello World Application</string>
     <string name="_3">3</string>
     <string name="string_3" />
-    <string name="hola_dispositivos_m_viles">HOLA Dispositivos Móviles</string>
+    <string name="hola_dispositivos_m_viles">Esto NO es una calculadora
+    bueno... si</string>
     <string name="_2">2</string>
     <string name="_1">1</string>
     <string name="Percentage">+</string>
