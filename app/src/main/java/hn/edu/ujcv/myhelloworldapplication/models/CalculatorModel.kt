@@ -3,12 +3,12 @@ package hn.edu.ujcv.myhelloworldapplication.models
 class CalculatorModel {
     //
     //constantes de operaciones
-    val none = 0;
-    val sum = 1;
-    val subs = 2;
-    val mul = 4;
-    val div = 5;
-    var percent = 6;
+    val none = 0
+    val sum = 1
+    val subs = 2
+    val mul = 4
+    val div = 5
+    var percent = 6
 
     // variables que llevan el estado de la calculadora
     var display: Double = 0.0
@@ -16,10 +16,11 @@ class CalculatorModel {
     var operando2: Double = 0.0
     var operacion: Int = 0
     var resultado: Double = 0.0
-    var willClear = false;
-    var dotExistence = false;
+    var willClear = false
+    var dotExistence = false
 
     fun xd(digit: Double, clear: Boolean = false) {
+
         if (resultado == 0.0) {
             if (dotExistence) {
                 if (willClear) {
@@ -42,11 +43,10 @@ class CalculatorModel {
         }
 
         if (resultado !== 0.0) {
-
             if (dotExistence) {
                 if (willClear) {
                     willClear = false
-                    resultado = display
+                   /**/resultado = display
                     display = digit
                 } else {
                     display = digitize(display, digit, true)
@@ -58,10 +58,13 @@ class CalculatorModel {
                     operando1 = display
                     display = digit
                 } else {
+                    acPressed()
                     display = digitize(display, digit)
                 }
             }
         }
+
+
         }
 
 
